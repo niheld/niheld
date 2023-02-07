@@ -1,0 +1,25 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}News{% endblock %}
+
+{% block body %}
+
+<div class="container">
+   <h1>List Articles</h1>
+   <div class="row">
+   {% for post in posts %}
+   <div class="col-3">
+        <div class="card">
+            <img src="https://mdbcdn.b-cdn.net/img/new/standard/nature/184.webp" class="card-img-top" alt="Fissure in Sandstone"/>
+            <div class="card-body"> 
+                <h5 class="card-title">{{post.title}}</h5>
+                <p class="card-text">{{post.content}}</p>
+                <p class="card-text">{{post.createdAt|date('d-m-Y')}}</p>
+                <a href="#!" class="btn btn-primary">Detail</a>
+            </div>
+        </div>
+    </div>
+   {% endfor %}
+   </div>
+</div>
+{% endblock %}
