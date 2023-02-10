@@ -5,9 +5,7 @@
         <title>{% block title %}Welcome!{% endblock %}</title>
         <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text></svg>">
         {# Run `composer require symfony/webpack-encore-bundle` to start using Symfony UX #}
-        {% block stylesheets %}
-            <!-- Font Awesome -->
-            <link
+         <link
             href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
             rel="stylesheet"
             />
@@ -21,19 +19,115 @@
             href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.1.0/mdb.min.css"
             rel="stylesheet"
             />
-        {% endblock %}
+            <link rel="stylesheet" href="{{ asset('assets/css/style.css') }}" />
+        
+        {% block stylesheets %}{% endblock %}
 
         
     </head>
 
     <body>
+        <header>
+            <!-- Navbar -->
+            <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <!-- Container wrapper -->
+            <div class="container-fluid">
+                <!-- Toggle button -->
+                <button
+                class="navbar-toggler"
+                type="button"
+                data-mdb-toggle="collapse"
+                data-mdb-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent"
+                aria-expanded="false"
+                aria-label="Toggle navigation"
+                >
+                <i class="fas fa-bars"></i>
+                </button>
+
+                <!-- Collapsible wrapper -->
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <!-- Navbar brand -->
+                <a class="navbar-brand mt-2 mt-lg-0" href="#">
+                    <img
+                    src="https://mdbcdn.b-cdn.net/img/logo/mdb-transaprent-noshadows.webp"
+                    height="15"
+                    alt="MDB Logo"
+                    loading="lazy"
+                    />
+                </a>
+                <!-- Left links -->
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/">Accueil</a>
+                    </li>
+                    {% if app.user %}
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Tableau de bord</a>
+                        </li>
+                    {% endif %}
+                    
+                    
+                    
+                </ul>
+                <!-- Left links -->
+                </div>
+                <!-- Collapsible wrapper -->
+
+                <!-- Right elements -->
+                <div class="d-flex align-items-center">
+                <!-- Avatar -->
+                {% if app.user %}
+                    <div class="dropdown">
+                        <a
+                        class="dropdown-toggle d-flex align-items-center hidden-arrow"
+                        href="#"
+                        id="navbarDropdownMenuAvatar"
+                        role="button"
+                        data-mdb-toggle="dropdown"
+                        aria-expanded="false"
+                        >
+                        <img
+                            src="https://mdbcdn.b-cdn.net/img/new/avatars/2.webp"
+                            clanoss="rounded-circle"
+                            height="25"
+                            alt="Black and White Portrait of a Man"
+                            loading="lazy"
+                        />
+                        </a>
+                        <ul
+                        class="dropdown-menu dropdown-menu-end"
+                        aria-labelledby="navbarDropdownMenuAvatar"
+                        >
+                        <li class="ms-3 mt-2">{{app.user.email}}</li>
+                        <li>
+                            <a class="dropdown-item" href="#"> profile</a>
+                        </li>
+                        
+                        <li>
+                            <a class="dropdown-item" href="{{path('app_logout')}}">Logout</a>
+                        </li>
+                        </ul>
+                    </div>
+                {% else %}
+                    <a class="text-dark" href="{{path('app_login')}}">Connexion</a>
+                {% endif %}
+                
+                </div>
+                <!-- Right elements -->
+            </div>
+            <!-- Container wrapper -->
+            </nav>
+            <!-- Navbar -->
+        </header>
         {% block body %}{% endblock %}
-        {% block javascripts %}
-            <!-- MDB -->
-            <script
+        <!-- MDB -->
+        <script
             type="text/javascript"
             src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.1.0/mdb.min.js"
-            ></script>
+        ></script>
+        {% block javascripts %}
+            
         {% endblock %}
     </body>
 </html>
