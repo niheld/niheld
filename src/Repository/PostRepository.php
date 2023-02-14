@@ -39,6 +39,8 @@ class PostRepository extends ServiceEntityRepository
         }
     }
 
+  
+
 //    /**
 //     * @return Post[] Returns an array of Post objects
 //     */
@@ -63,4 +65,18 @@ class PostRepository extends ServiceEntityRepository
 //            ->getOneOrNullResult()
 //        ;
 //    }
+
+    /**
+     * @return Post[] Returns an array of Post objects
+     */
+    public function findByExampleField($value): array
+    {
+        return $this->createQueryBuilder('p')
+                    ->andWhere('p.author = :val')
+                    ->setParameter('val', $value)
+                    ->setMaxResults(10)
+                    ->getQuery()
+                    ->getResult()
+        ;
+    }
 }
